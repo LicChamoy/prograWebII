@@ -3,9 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comentarios</title>
+
+    <link rel="stylesheet" href="../css/post.css">
+    <title>Post</title>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="imagen">
+            <img src="../img/logo.png" alt="Logo">
+        </div>
+        <div class="busqueda">
+            <div class="cuadro">
+                <label for="buscar">
+                    <input type="text" placeholder="Buscar..." id="buscar">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;" id="buscar"></i>
+                </label>
+            </div>
+        </div>
+        <div class="perfil">
+            <label for="perfil">
+                <div class="imagen" id="perfil">
+                    <img src="../img/admin.png" alt="Foto de perfil">
+                </div>
+                <h5>Chamoi</h5>
+            </label>
+        </div>
+        <div class="cerrarSesion">
+            <label for="cerrarSesionbtn">
+                <h5>Cerrar sesión</h5>
+            </label>
+        </div>
+    </nav>
+
+    <div class="contenedor">
+        <div class="izquierda">
+            <div class="etiqueta">
+                <label for="home">
+                    <i class="fa-solid fa-house" id="home"></i>
+                    Home
+                </label>
+            </div>
+            <div class="etiqueta">
+                <label for="etiquetas">
+                    <i class="fa-solid fa-tag fa-flip-horizontal" id="etiquetas"></i> 
+                    Etiquetas
+                </label>
+            </div>
+            <div class="etiqueta"> Etiquetas populares  </div>
+            <div class="etiqueta">
+                <label for="react">
+                    <i class="fa-solid fa-tag fa-flip-horizontal" id="react"></i> 
+                    React 
+                </label>
+            </div>
+            <div class="etiqueta">
+                <label for="js">
+                    <i class="fa-solid fa-tag fa-flip-horizontal" id="js"></i> 
+                    JavaScript 
+                </label>
+            </div>
+        </div>
+        <div class="publicacion">
+            <div class="publicacion-detalle">
+                <div class="texto-detalle">
+                    <div class="superior">
+                        <img src="../img/admin.png" alt="imagenUsuario">
+                        <h5 id="discusion">/preguntaReact ∼</h5>
+                        <h5 id="hora">hace 7 horas</h5>
+                    </div>
+                    <h5 id="usuario">Chamoi</h5>
+                </div>
+                <div class="publicacion-contenido">
+                    Aquí irá la duda correspondiente al tema seleccionado o etiqueta de la publicación.
+                </div>
+                <div class="opciones">
+                    <div class="boton">
+                        <label for="like">
+                            <i class="fa-solid fa-up-long" style="color: #ffffff;" id="like"></i>
+                            0 
+                        </label>
+                        <label for="dislike">
+                            <i class="fa-solid fa-down-long" style="color: #ffffff;" id="dislike"></i>
+                        </label>
+                    </div>
+
+                    <div class="boton">
+                        <label for="comentario">
+                            <i class="fa-solid fa-comment" style="color: #ffffff;" id="comentario"></i>
+                            1
+                        </label>
+                    </div>
+
+                    <div class="boton">
+                        <label for="agregar">
+                            <i class="fa-solid fa-plus" style="color: #ffffff;" id="agregar"></i>
+                            Añadir comentario
+                        </label>
+                    </div>
+                </div>
+                <div class="comentario-contenedor">
+                    <div class="comentario">
+                        <div class="texto-detalle">
+                            <div class="superior">
+                                <img src="../img/admin.png" alt="imagenUsuario">
+                                <h5 id="usuarioCom">Anonimo ∼</h5>
+                                <h5 id="hora">hace 5 horas</h5>
+                            </div>
+                            <h5 id="comentarioUsu">Aquí irá la respuesta a la publicación con dudas de algún tema en específico.</h5>
+                        </div>
+                    </div>
+                    <div class="opcionesCom">
+                        <div class="botonCom">
+                            <label for="likeCom">
+                                <i class="fa-solid fa-up-long" style="color: #ffffff;" id="likeCom"></i>
+                                0 
+                            </label>
+                            <label for="dislikeCom">
+                                <i class="fa-solid fa-down-long" style="color: #ffffff;" id="dislikeCom"></i>
+                            </label>
+                        </div>
     
+                        <div class="botonCom">
+                            <label for="comentarioCom">
+                                <i class="fa-solid fa-comment" style="color: #ffffff;" id="comentarioCom"></i>
+                                1
+                            </label>
+                        </div>
+    
+                        <div class="botonCom">
+                            <label for="agregarCom">
+                                <i class="fa-solid fa-plus" style="color: #ffffff;" id="agregarCom"></i>
+                                Añadir comentario
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            
+        </div>
+    </div>
 </body>
+
+<script src="https://kit.fontawesome.com/e43020caa8.js" crossorigin="anonymous"></script>
 </html>
