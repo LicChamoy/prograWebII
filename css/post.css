@@ -3,25 +3,6 @@ body{
     margin: 0;
 }
 
-/* Contenedor izquierda */
-.contenedor{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 20px;
-    display: flex;
-    height: 100vh;
-}
-
-.izquierda{
-    width: 175px;
-    border-right: 4px solid #c9c9c9;
-}
-
-.etiqueta{
-    margin-bottom: 10px;
-    color: white;
-}
-/* Contenedor izquierda */
-
 /* Publicacion */
 .publicacion{
     width: 100%;
