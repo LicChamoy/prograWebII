@@ -1,0 +1,97 @@
+body{
+    background-color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Logo y letras */
+.contenedor{
+    background-color: #2a3235;
+    width: 375px;
+    height: 480px;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.letras img{
+    width: 55px;
+    height: 55px;
+}
+
+.letras{
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.letras h5{
+    font-size: large;
+    margin: 0;
+}
+/* Logo y letras */
+
+/* inputs y letras */
+.nombre, .email, .password{
+    font-size: 20px;
+}
+
+.nombre h4{
+    margin: 30px 0 0 0;
+}
+
+.email h4, .password h4{
+    margin: 10px 0 0 0;
+}
+
+.inputs{
+    width: 98%;
+    background-color: rgb(226, 226, 226);
+}
+
+.inputs:hover{
+    background-color: rgb(187, 187, 187);
+}
+/* inputs y letras */
+
+/* boton registrar */
+.contenedor label{
+    width: 100%;
+}
+
+.boton{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(42, 42, 211);
+    border-radius: 5px;
+    width: 100%;
+    height: 30px;
+}
+
+.boton:hover{
+    background-color: rgb(33, 33, 107);
+}
+/* boton registrar */
+
+/* letras inicio sesion */
+.iniciar-sesion{
+    display: flex;
+    font-size: 20px;
+    margin: 0;
+}
+
+.iniciar-sesion a{
+    color: rgb(142, 142, 255);
+    margin-left: 10px;
+}
+
+.iniciar-sesion a:hover{
+    color: rgb(121, 121, 255);
+}
+/* letras inicio sesion */

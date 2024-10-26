@@ -1,22 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
-import Registro from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import Post from './pages/PostPage';
-import './App.css';
+import Register from './pages/Register';
+import PostPage from './pages/PostPage';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/registro" component={Registro} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/post" component={Post} />
-        {/* Redirigir a la página de login si no coincide ninguna ruta */}
-        <Redirect to="/login" />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/post" element={<PostPage />} />
+      </Routes>
     </Router>
   );
 }
