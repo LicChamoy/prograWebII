@@ -11,7 +11,7 @@ window.addEventListener("load", function(event) {
             alert("Por favor rellene todos los campos.");
         }else{
             alert("Usuario registrado correctamente. Inicie sesion")
-            location.replace("login.html");
+            location.replace("login");
         }
         //obtener valores de los input
     });

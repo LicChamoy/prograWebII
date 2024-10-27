@@ -4,7 +4,7 @@ body{
 }
 
 /* Logo y letras */
-.contenedor{
+.contenedor-registro{
     background-color: #2a3235;
     width: 375px;
     height: 480px;
@@ -59,11 +59,11 @@ body{
 /* inputs y letras */
 
 /* boton registrar */
-.contenedor label{
+.contenedor-registro label{
     width: 100%;
 }
 
-.boton{
+.boton-registro{
     display: flex;
     justify-content: center;
     text-align: center;
@@ -74,7 +74,7 @@ body{
     height: 30px;
 }
 
-.boton:hover{
+.boton-registro:hover{
     background-color: rgb(33, 33, 107);
 }
 /* boton registrar */

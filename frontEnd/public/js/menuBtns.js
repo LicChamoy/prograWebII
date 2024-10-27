@@ -2,7 +2,7 @@ window.addEventListener("load", function(event) {
     //Cerrar sesion
     const cerrarSesionBtn = document.getElementById('cerrarSesion');
     cerrarSesionBtn.addEventListener('click', function(){
-        location.replace("login.html");
+        location.replace("login");
     });
     //Cerrar sesion
 

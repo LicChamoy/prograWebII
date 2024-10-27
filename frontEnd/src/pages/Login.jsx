@@ -31,7 +31,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="login-container">
         <div className="data" style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center' }}>
           <br />
-          <img id="logo" src="../src/img/logo.png" alt="logo" style={{ width: '60px' }} />
+          <img id="logo" src="../img/logo.png" alt="logo" style={{ width: '60px' }} />
           <br />
           <p>Inicio de sesión</p>
           <br />

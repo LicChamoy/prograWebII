@@ -1,8 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/post.css';
 import '../styles/menu.css';
 
 const PostPage = () => {
+
+    useEffect(() => {
+        // Crear el elemento <script>
+        const script = document.createElement('script');
+        script.src = '../js/postbtns.js'; // Cambia la ruta si es necesario
+        script.async = true;
+
+        // Agregar el script al body
+        document.body.appendChild(script);
+
+        // Limpiar el script al desmontar el componente
+        return () => {
+            document.body.removeChild(script);
+        };
+
+    }, []); // Ejecutar solo una vez al montar
+
+    useEffect(() => {
+        // Crear el elemento <script>
+        const script = document.createElement('script');
+        script.src = '../js/menubtns.js'; // Cambia la ruta si es necesario
+        script.async = true;
+
+        // Agregar el script al body
+        document.body.appendChild(script);
+
+        // Limpiar el script al desmontar el componente
+        return () => {
+            document.body.removeChild(script);
+        };
+
+    }, []); // Ejecutar solo una vez al montar
+
     return (
         <div>
             {/* Menu */}
@@ -83,27 +116,64 @@ const PostPage = () => {
                             Aquí irá la duda correspondiente al tema seleccionado o etiqueta de la publicación.
                         </div>
                         <div className="opciones">
-                            <div className="boton" id="likes">
+                            <div className="boton-pub" id="likes">
                                 <label htmlFor="like">
-                                    <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} />
+                                    <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} id="like"></i>
                                     0
                                 </label>
                                 <label htmlFor="dislike">
-                                    <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} />
+                                    <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} id="dislike"></i>
                                 </label>
                             </div>
                             <label htmlFor="comentario">
-                                <div className="boton" id="comentario">
-                                    <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} />
+                                <div className="boton-pub" id="comentario">
+                                    <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} id="comentario"></i>
                                     1
                                 </div>
                             </label>
                             <label htmlFor="agregar">
-                                <div className="boton" id="agregar">
-                                    <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} />
+                                <div className="boton-pub" id="agregar">
+                                    <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} id="agregar"></i>
                                     Añadir comentario
                                 </div>
                             </label>
+                        </div>
+                        <div className="comentario-contenedor">
+                            <div className="comentario">
+                                <div className="texto-detalle">
+                                    <div className="superior">
+                                        <img src="../img/admin.png" alt="imagenUsuario"/>
+                                            <h5 id="usuarioCom">Anonimo ∼</h5>
+                                            <h5 id="hora">hace 5 horas</h5>
+                                    </div>
+                                    <h5 id="comentarioUsu">Aquí irá la respuesta a la publicación con dudas de algún tema en específico.</h5>
+                                </div>
+                            </div>
+                            <div className="opcionesCom">
+                                <div className="botonCom" id="likesCom">
+                                    <label htmlFor="likeCom">
+                                        <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} id="likeCom"></i>
+                                        0
+                                    </label>
+                                    <label htmlFor="dislikeCom">
+                                        <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} id="dislikeCom"></i>
+                                    </label>
+                                </div>
+
+                                <label htmlFor="comentarioCom">
+                                    <div className="botonCom" id="comentarioCom">
+                                        <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} id="comentarioCom"></i>
+                                        1
+                                    </div>
+                                </label>
+
+                                <label htmlFor="agregarCom">
+                                    <div className="botonCom" id="agregarCom">
+                                        <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} id="agregarCom"></i>
+                                        Añadir comentario
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
