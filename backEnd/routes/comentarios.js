@@ -8,7 +8,8 @@ const adminMiddleware = require('../middleware/adminMiddleware');
 // Crear un nuevo comentario en una publicación
 router.post('/:idPublicacion/comentarios', authMiddleware, async (req, res) => {
   try {
-    const { idUsuario, contenido } = req.body;
+    const { contenido } = req.body;
+    const idUsuario = req.usuarioId; // El ID del usuario viene del middleware authMiddleware
     const nuevoComentario = new Comentario({ idPublicacion: req.params.idPublicacion, idUsuario, contenido });
     await nuevoComentario.save();
     res.status(201).json({ mensaje: 'Comentario agregado con éxito', comentario: nuevoComentario });
