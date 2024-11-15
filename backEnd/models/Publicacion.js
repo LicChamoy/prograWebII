@@ -5,7 +5,6 @@ const publicacionSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
   contenido: { type: String, required: true },
   fechaPublicacion: { type: Date, default: Date.now },
-  etiquetas: [{ type: String }]
-});
+  etiquetas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Etiqueta' }]});
 
 module.exports = mongoose.model('Publicacion', publicacionSchema);
