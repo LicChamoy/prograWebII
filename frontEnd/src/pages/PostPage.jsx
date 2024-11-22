@@ -1,40 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import '../styles/post.css';
 import '../styles/menu.css';
 
 const PostPage = () => {
+    const { id } = useParams();
+    const [publicacion, setPublicacion] = useState(null);
+    const [comentarios, setComentarios] = useState([]);
+    const [nuevoComentario, setNuevoComentario] = useState('');
 
     useEffect(() => {
-        // Crear el elemento <script>
-        const script = document.createElement('script');
-        script.src = '../js/postbtns.js'; // Cambia la ruta si es necesario
-        script.async = true;
-
-        // Agregar el script al body
-        document.body.appendChild(script);
-
-        // Limpiar el script al desmontar el componente
-        return () => {
-            document.body.removeChild(script);
+        const fetchPublicacion = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/publicaciones/${id}`);
+                const data = await response.json();
+                setPublicacion(data.publicacion);
+                setComentarios(data.comentarios);
+            } catch (err) {
+                console.error('Error al obtener la publicación:', err);
+            }
         };
 
-    }, []); // Ejecutar solo una vez al montar
+        fetchPublicacion();
+    }, [id]);
 
-    useEffect(() => {
-        // Crear el elemento <script>
-        const script = document.createElement('script');
-        script.src = '../js/menubtns.js'; // Cambia la ruta si es necesario
-        script.async = true;
+    const manejarComentarioChange = (e) => setNuevoComentario(e.target.value);
 
-        // Agregar el script al body
-        document.body.appendChild(script);
+    const manejarComentarioSubmit = async (e) => {
+        e.preventDefault();
+        if (nuevoComentario.trim() === '') return;
 
-        // Limpiar el script al desmontar el componente
-        return () => {
-            document.body.removeChild(script);
-        };
+        try {
+            const response = await fetch(`http://localhost:5000/publicaciones/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ contenido: nuevoComentario }),
+            });
 
-    }, []); // Ejecutar solo una vez al montar
+            const data = await response.json();
+            setComentarios([...comentarios, data.comentario]);
+            setNuevoComentario('');
+        } catch (err) {
+            console.error('Error al agregar el comentario:', err);
+        }
+    };
+
+    if (!publicacion) {
+        return <div>Cargando publicación...</div>;
+    }
 
     return (
         <div>
@@ -67,59 +82,28 @@ const PostPage = () => {
                     </label>
                 </div>
             </nav>
-            {/* Menu */}
 
             {/* Div contenedor de todo */}
             <div className="contenedor">
-                {/* Contenedor de la parte de etiquetas */}
-                <div className="izquierda">
-                    <label htmlFor="home">
-                        <div className="etiqueta" id="home">
-                            <i className="fa-solid fa-house" />
-                            Home
-                        </div>
-                    </label>
-                    <label htmlFor="etiquetas">
-                        <div className="etiqueta" id="etiquetas">
-                            <i className="fa-solid fa-tag fa-flip-horizontal" />
-                            Etiquetas
-                        </div>
-                    </label>
-                    <div className="etiqueta">Etiquetas populares</div>
-                    <label htmlFor="react">
-                        <div className="etiqueta" id="react">
-                            <i className="fa-solid fa-tag fa-flip-horizontal" />
-                            React
-                        </div>
-                    </label>
-                    <label htmlFor="js">
-                        <div className="etiqueta" id="js">
-                            <i className="fa-solid fa-tag fa-flip-horizontal" />
-                            JavaScript
-                        </div>
-                    </label>
-                </div>
-                {/* Contenedor de la parte de etiquetas */}
-
                 {/* Contenedor de la publicación */}
                 <div className="publicacion">
                     <div className="publicacion-detalle">
                         <div className="texto-detalle">
                             <div className="superior">
                                 <img src="../img/admin.png" alt="imagenUsuario" />
-                                <h5 id="discusion">/preguntaReact ∼</h5>
-                                <h5 id="hora">hace 7 horas</h5>
+                                <h5 id="discusion">/{publicacion.titulo} ∼</h5>
+                                <h5 id="hora">{new Date(publicacion.createdAt).toLocaleString()}</h5> {/* Fecha de creación */}
                             </div>
-                            <h5 id="usuario">Chamoi</h5>
+                            <h5 id="usuario">{publicacion.idUsuario.nombreUsuario}</h5> {/* Nombre del usuario */}
                         </div>
                         <div className="publicacion-contenido">
-                            Aquí irá la duda correspondiente al tema seleccionado o etiqueta de la publicación.
+                            {publicacion.contenido} {/* Contenido de la publicación */}
                         </div>
                         <div className="opciones">
                             <div className="boton-pub" id="likes">
                                 <label htmlFor="like">
                                     <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} id="like"></i>
-                                    0
+                                    0 {/* Aquí podrías usar el conteo de likes */}
                                 </label>
                                 <label htmlFor="dislike">
                                     <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} id="dislike"></i>
@@ -128,56 +112,38 @@ const PostPage = () => {
                             <label htmlFor="comentario">
                                 <div className="boton-pub" id="comentario">
                                     <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} id="comentario"></i>
-                                    1
-                                </div>
-                            </label>
-                            <label htmlFor="agregar">
-                                <div className="boton-pub" id="agregar">
-                                    <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} id="agregar"></i>
-                                    Añadir comentario
+                                    {comentarios.length} {/* Número de comentarios */}
                                 </div>
                             </label>
                         </div>
+
+                        {/* Formulario para añadir un comentario */}
+                        <div className="comentario-formulario">
+                            <textarea
+                                value={nuevoComentario}
+                                onChange={manejarComentarioChange}
+                                placeholder="Añadir un comentario"
+                            />
+                            <button onClick={manejarComentarioSubmit}>Añadir comentario</button>
+                        </div>
+
+                        {/* Mostrar comentarios */}
                         <div className="comentario-contenedor">
-                            <div className="comentario">
-                                <div className="texto-detalle">
-                                    <div className="superior">
-                                        <img src="../img/admin.png" alt="imagenUsuario"/>
-                                            <h5 id="usuarioCom">Anonimo ∼</h5>
-                                            <h5 id="hora">hace 5 horas</h5>
+                            {comentarios.map((comentario) => (
+                                <div key={comentario._id} className="comentario">
+                                    <div className="texto-detalle">
+                                        <div className="superior">
+                                            <img src="../img/admin.png" alt="imagenUsuario" />
+                                            <h5 id="usuarioCom">{comentario.idUsuario.nombreUsuario} ∼</h5>
+                                            <h5 id="hora">{new Date(comentario.createdAt).toLocaleString()}</h5> {/* Fecha del comentario */}
+                                        </div>
+                                        <h5 id="comentarioUsu">{comentario.contenido}</h5> {/* Contenido del comentario */}
                                     </div>
-                                    <h5 id="comentarioUsu">Aquí irá la respuesta a la publicación con dudas de algún tema en específico.</h5>
                                 </div>
-                            </div>
-                            <div className="opcionesCom">
-                                <div className="botonCom" id="likesCom">
-                                    <label htmlFor="likeCom">
-                                        <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} id="likeCom"></i>
-                                        0
-                                    </label>
-                                    <label htmlFor="dislikeCom">
-                                        <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} id="dislikeCom"></i>
-                                    </label>
-                                </div>
-
-                                <label htmlFor="comentarioCom">
-                                    <div className="botonCom" id="comentarioCom">
-                                        <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} id="comentarioCom"></i>
-                                        1
-                                    </div>
-                                </label>
-
-                                <label htmlFor="agregarCom">
-                                    <div className="botonCom" id="agregarCom">
-                                        <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} id="agregarCom"></i>
-                                        Añadir comentario
-                                    </div>
-                                </label>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-                {/* Contenedor de la publicación */}
             </div>
             {/* Div contenedor de todo */}
         </div>
