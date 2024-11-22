@@ -1,0 +1,89 @@
+body{
+    background-color: black;
+    margin: 0;
+}
+
+/* Publicacion */
+.publicacion-dashboard{
+    width: 100%;
+    justify-items: center;
+}
+
+.publicacion-dashboard label{
+    display: block;
+    justify-items: center;
+}
+
+.publicacion-detalle-dashboard img{
+    max-width: 75px;
+    max-height: 75px;
+    border-radius: 10px;
+}
+
+.publicacion-detalle-dashboard{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 30px;
+    width: 900px;
+    height: 160px;
+    border-radius: 5px;
+    background-color: rgb(26, 26, 26);
+    padding: 15px;
+    margin-bottom: 50px;
+}
+
+.publicacion-detalle-dashboard:hover{
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+
+.texto-detalle-dashboard{
+    display: flex;
+    flex-direction: column;
+}
+
+.superior-dashboard{
+    display: flex;
+}
+
+#discusion{
+    margin-left: 5px;
+    color: white;
+}
+
+#hora{
+    color: #c9c9c9;
+    margin-left: 5px;
+}
+
+#usuario{
+    color: darkcyan;
+    margin-top: -30px;
+    margin-left: 80px;
+}
+
+.publicacion-contenido-dashboard{
+    background-color: #2a3235;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #c9c9c9;
+}
+/* Publicacion */
+
+/* Publicacion crear */
+.btn-crearPub{
+    background-color: rgb(46, 46, 46);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.btn-crearPub:hover{
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+/* Publicacion crear */

@@ -19,4 +19,11 @@ pub3.addEventListener('click', function(){
     console.log("Soy la publicacion 3");
 });
 //pub-3
+
+//crear publicacion
+const crear = document.getElementById("crearPub");
+crear.addEventListener('click', function(){
+    console.log('Fui a crear una publicacion.')
+});
+//crear publicacion
 });
