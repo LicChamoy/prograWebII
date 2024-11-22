@@ -1,5 +1,6 @@
 // Post.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/post.css';
 
 const Post = ({ publicacion }) => {
@@ -7,7 +8,7 @@ const Post = ({ publicacion }) => {
     return <div>Publicación no disponible.</div>;
   }
 
-  const { titulo, contenido, etiquetas, fechaPublicacion } = publicacion;
+  const { _id, titulo, contenido, etiquetas, fechaPublicacion } = publicacion;
   const fecha = new Date(fechaPublicacion).toLocaleDateString();
 
   return (
@@ -16,10 +17,12 @@ const Post = ({ publicacion }) => {
         <div className="texto-detalle">
           <div className="superior">
             <img src="../img/admin.png" alt="imagenUsuario" />
-            <h5>/preguntaReact ∼</h5>
             <h5>{fecha}</h5>
           </div>
-          <h5>{titulo}</h5>
+          {/* Usamos Link para envolver el título */}
+          <Link to={`/publicaciones/${_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h5>{titulo}</h5>
+          </Link>
         </div>
         <div className="publicacion-contenido">
           {contenido}
