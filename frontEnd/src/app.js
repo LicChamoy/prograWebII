@@ -13,7 +13,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/post" element={<PostPage />} />
+<<<<<<< HEAD
         <Route path="/Dashboard" element={<Dashboard />} />
+=======
+        <Route path="/dashboard" element={<Dashboard />} />
+>>>>>>> e7f8d968c872e0f5f570e942c7f951ba549c585b
       </Routes>
     </Router>
   );

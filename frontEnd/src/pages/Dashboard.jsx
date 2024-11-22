@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
@@ -42,5 +43,31 @@ const Dashboard = () => {
     </div>
   );
 };
+=======
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import PostDashboard from '../components/PostDashboard';
+import '../styles/menu.css';
+import '../styles/dashboardEstilo.css';
+
+function Dashboard() {
+    return (
+        <div>
+            {/* Barra de navegación */}
+            <Navbar />
+
+            {/* Contenedor principal */}
+            <div className="contenedor">
+                {/* Barra lateral */}
+                <Sidebar />
+
+                {/* Dashboard de publicaciones */}
+                <PostDashboard />
+            </div>
+        </div>
+    );
+}
+>>>>>>> e7f8d968c872e0f5f570e942c7f951ba549c585b
 
 export default Dashboard;
