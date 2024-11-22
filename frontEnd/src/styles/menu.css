@@ -47,6 +47,19 @@
     justify-content: center;
 }
 
+.login-button{
+    background-color: cyan;
+    color: black;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 95px;
+    height: 60px;
+}
+
+
 .cerrarSesion{
     background-color: rgb(216, 22, 22);
     color: white;
