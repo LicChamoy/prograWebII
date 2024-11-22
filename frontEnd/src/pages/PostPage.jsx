@@ -12,21 +12,24 @@ const PostPage = () => {
     const [nuevoComentario, setNuevoComentario] = useState('');
 
     useEffect(() => {
-        const fetchPublicacion = async () => {
+        const fetchPublicacionYComentarios = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/publicaciones/${id}`);
-                const data = await response.json();
-                console.log(data);  // Agrega este log para revisar la respuesta del servidor
-                setPublicacion(data.publicacion);
-                setComentarios(data.comentarios || []);  // Garantiza que los comentarios sean un arreglo
+                const responsePublicacion = await fetch(`http://localhost:5000/publicaciones/${id}`);
+                const dataPublicacion = await responsePublicacion.json();
+                setPublicacion(dataPublicacion.publicacion);
+    
+                const responseComentarios = await fetch(`http://localhost:5000/publicaciones/${id}/comentarios`);
+                const dataComentarios = await responseComentarios.json();
+                console.log('Comentarios obtenidos:', dataComentarios); // Revisa los datos obtenidos
+                setComentarios(dataComentarios || []); // Asegúrate de que sea un arreglo
             } catch (err) {
-                console.error('Error al obtener la publicación en la pagina:', err);
+                console.error('Error al obtener la publicación o los comentarios:', err);
             }
         };
     
-        fetchPublicacion();
+        fetchPublicacionYComentarios();
     }, [id]);
-    
+        
 
     const manejarComentarioChange = (e) => setNuevoComentario(e.target.value);
 
