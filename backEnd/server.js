@@ -26,9 +26,16 @@ app.use('/usuarios', usuariosRoutes);
 app.use('/publicaciones', publicacionesRoutes);
 app.use('/etiquetas', etiquetasRoutes);
 app.use('/comentarios', comentariosRoutes);
-
 app.use('/comentarios/reportados', authMiddleware, adminMiddleware, comentariosRoutes);
 app.use('/auth', authRoutes);
+
+const frontendPath = path.join(__dirname, 'frontend', 'build');
+app.use(express.static(frontendPath));
+
+// Redirigir rutas no definidas al frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // Configuración del puerto
 const PORT = process.env.PORT || 5000;
