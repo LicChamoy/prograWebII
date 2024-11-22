@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; 
 import Navbar from '../components/Navbar';
 import '../styles/post.css';
 import '../styles/menu.css';
@@ -32,9 +33,14 @@ const PostPage = () => {
         if (nuevoComentario.trim() === '') return;
     
         try {
-            console.log('entro al try')
             const token = localStorage.getItem('token'); // Obtener el token del usuario
-            console.log('saco el token')
+    
+            if (!token) {
+              throw new Error('No se encontró el token. El usuario no está autenticado.');
+            }
+
+            const decodedToken = jwtDecode(token);
+            const idUsuario = decodedToken.id;
             
             const response = await fetch(`http://localhost:5000/publicaciones/${id}/comentarios`, {
                 method: 'POST',
@@ -45,13 +51,10 @@ const PostPage = () => {
                 body: JSON.stringify({
                     contenido: nuevoComentario,
                     // Asegúrate de incluir el idUsuario
-                    idUsuario: '673fd7fd2fc3052ba8e81ecb',  // Esto debe ser dinámico si el usuario está autenticado
+                    idUsuario: idUsuario,  // Esto debe ser dinámico si el usuario está autenticado
                 }),
             });
-    
-            console.log('salio del fetch')
             if (!response.ok) {
-                console.log('sigue en el try')
                 throw new Error('Error al agregar el comentario');
             }
     
