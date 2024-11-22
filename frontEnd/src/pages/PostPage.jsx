@@ -29,16 +29,31 @@ const PostPage = () => {
     const manejarComentarioSubmit = async (e) => {
         e.preventDefault();
         if (nuevoComentario.trim() === '') return;
-
+    
         try {
-            const response = await fetch(`http://localhost:5000/publicaciones/${id}`, {
+            console.log('entro al try')
+            const token = localStorage.getItem('token'); // Obtener el token del usuario
+            console.log('saco el token')
+            
+            const response = await fetch(`http://localhost:5000/publicaciones/${id}/comentarios`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({ contenido: nuevoComentario }),
+                body: JSON.stringify({
+                    contenido: nuevoComentario,
+                    // Asegúrate de incluir el idUsuario
+                    idUsuario: '673fd7fd2fc3052ba8e81ecb',  // Esto debe ser dinámico si el usuario está autenticado
+                }),
             });
-
+    
+            console.log('salio del fetch')
+            if (!response.ok) {
+                console.log('sigue en el try')
+                throw new Error('Error al agregar el comentario');
+            }
+    
             const data = await response.json();
             setComentarios([...comentarios, data.comentario]);
             setNuevoComentario('');
@@ -46,8 +61,33 @@ const PostPage = () => {
             console.error('Error al agregar el comentario:', err);
         }
     };
+    
+    const manejarReporteComentario = async (idComentario) => {
+        try {
+            const token = localStorage.getItem('token'); // Obtener el token del usuario
+            const response = await fetch(`http://localhost:5000/comentarios/${idComentario}/reportar`, {
+                method: 'PATCH',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-    if (!publicacion) {
+            if (!response.ok) {
+                throw new Error('Error al reportar el comentario');
+            }
+
+            const data = await response.json();
+            setComentarios((prev) =>
+                prev.map((comentario) =>
+                    comentario._id === idComentario
+                        ? { ...comentario, reportado: true }
+                        : comentario
+                )
+            );
+        } catch (err) {
+            console.error('Error al reportar el comentario:', err);
+        }
+    };    if (!publicacion) {
         return <div>Cargando publicación...</div>;
     }
 
@@ -92,7 +132,7 @@ const PostPage = () => {
                             <div className="superior">
                                 <img src="../img/admin.png" alt="imagenUsuario" />
                                 <h5 id="discusion">/{publicacion.titulo} ∼</h5>
-                                <h5 id="hora">{new Date(publicacion.createdAt).toLocaleString()}</h5> {/* Fecha de creación */}
+                                <h5 id="hora">{new Date(publicacion.fechaPublicacion).toLocaleString()}</h5> {/* Fecha de creación */}
                             </div>
                             <h5 id="usuario">{publicacion.idUsuario.nombreUsuario}</h5> {/* Nombre del usuario */}
                         </div>
@@ -135,7 +175,7 @@ const PostPage = () => {
                                         <div className="superior">
                                             <img src="../img/admin.png" alt="imagenUsuario" />
                                             <h5 id="usuarioCom">{comentario.idUsuario.nombreUsuario} ∼</h5>
-                                            <h5 id="hora">{new Date(comentario.createdAt).toLocaleString()}</h5> {/* Fecha del comentario */}
+                                            <h5 id="hora">{new Date(comentario.fechaComentario).toLocaleString()}</h5> {/* Fecha del comentario */}
                                         </div>
                                         <h5 id="comentarioUsu">{comentario.contenido}</h5> {/* Contenido del comentario */}
                                     </div>

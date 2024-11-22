@@ -4,29 +4,6 @@ const Comentario = require('../models/Comentario');
 const Usuario = require('../models/Usuario');
 const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
 
-// Crear un nuevo comentario en una publicación
-router.post('/:idPublicacion/comentarios', authMiddleware, async (req, res) => {
-  try {
-    const { contenido } = req.body;
-    const idUsuario = req.usuarioId; // El ID del usuario viene del middleware authMiddleware
-    const nuevoComentario = new Comentario({ idPublicacion: req.params.idPublicacion, idUsuario, contenido });
-    await nuevoComentario.save();
-    res.status(201).json({ mensaje: 'Comentario agregado con éxito', comentario: nuevoComentario });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
-// Obtener todos los comentarios de una publicación
-router.get('/:idPublicacion/comentarios', async (req, res) => {
-  try {
-    const comentarios = await Comentario.find({ idPublicacion: req.params.idPublicacion });
-    res.json(comentarios);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
 // Reportar un comentario como inapropiado
 router.patch('/:idComentario/reportar', authMiddleware, async (req, res) => {
   try {
