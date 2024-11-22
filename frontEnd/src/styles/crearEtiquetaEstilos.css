@@ -1,0 +1,63 @@
+body{
+    background-color: black;
+    margin: 0;
+}
+
+.etiqueta-contenedor-crear{
+    width: 100%;
+    justify-items: center;
+}
+
+/* etiqueta crear */
+.etiqueta-crear{
+    background-color: rgb(17, 17, 17);
+    padding: 15px;
+    position: relative;
+    top: 15px;
+    margin-bottom: 30px;
+    width: 1375px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 200px;
+}
+
+.eti-opciones{
+    display: flex;
+    align-items: center;
+}
+
+.eti-opciones label{
+    color: white;
+    position: relative;
+}
+
+.eti-opciones select{
+    position: relative;
+    left: 15px;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+}
+
+.eti-opciones #input-eti-etiqueta{
+    left: 30px;
+    position: relative;
+}
+
+.etiqueta-crear #btn-crearEtiqueta{
+    background-color: #545454;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    width: 100px;
+    height: 45px;
+    top: 5px;
+    position: relative;
+}
+
+#btn-crearEtiqueta:hover{
+    background-color: #616161;
+}
+/* etiqueta crear */

@@ -1,0 +1,81 @@
+body{
+    background-color: black;
+    margin: 0;
+}
+
+.publicacion-contenedor-crear{
+    width: 100%;
+    justify-items: center;
+}
+
+/* Publicacion crear */
+.publicacion-crear{
+    background-color: rgb(17, 17, 17);
+    padding: 15px;
+    position: relative;
+    top: 15px;
+    margin-bottom: 30px;
+    width: 1375px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 200px;
+}
+
+.pub-opciones{
+    display: flex;
+    align-items: center;
+}
+
+.pub-opciones label{
+    color: white;
+    left: 5px;
+    position: relative;
+}
+
+.pub-opciones select{
+    position: relative;
+    left: 15px;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+}
+
+.pub-opciones #nombre-etiqueta{
+    left: 20px;
+    position: relative;
+}
+
+.pub-opciones #input-pub-etiqueta{
+    left: 30px;
+    position: relative;
+}
+
+.publicacion-crear #input-pub-titulo, #input-pub-contenido{
+    width: 300px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 5px;
+    resize: none;
+}
+
+.publicacion-crear #btn-crearPublicacion, #btn-crearEtiqueta{
+    background-color: #545454;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    width: 100px;
+    height: 35px;
+    top: 5px;
+    position: relative;
+}
+
+.publicacion-crear #btn-crearEtiqueta{
+    left: 1060px;
+}
+
+#btn-crearPublicacion:hover{
+    background-color: #616161;
+}
+/* Publicacion crear */
