@@ -6,6 +6,7 @@ import PostPage from './pages/PostPage';
 import Dashboard from './pages/Dashboard';
 import Etiqueta from './pages/CrearEtiq';
 import PublicacionCrear from './pages/CrearPub';
+import ReporteComentario from './pages/ReporteComentario';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Etiqueta" element={<Etiqueta />} />
         <Route path="/PublicacionCrear" element={<PublicacionCrear />} />
+        <Route path="/ReporteComentario" element={<ReporteComentario />} />
       </Routes>
     </Router>
   );
