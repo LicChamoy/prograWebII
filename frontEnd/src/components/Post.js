@@ -1,6 +1,5 @@
 // Post.jsx
 import React from 'react';
-import Comment from './Comment';
 import '../styles/post.css';
 
 const Post = ({ publicacion }) => {
@@ -25,26 +24,6 @@ const Post = ({ publicacion }) => {
         <div className="publicacion-contenido">
           {contenido}
         </div>
-        <div className="opciones">
-          <div className="boton" id="likes">
-            <label htmlFor="like">
-              <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} />
-              0
-            </label>
-            <label htmlFor="dislike">
-              <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} />
-            </label>
-          </div>
-          <div className="boton" id="comentario">
-            <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} />
-            1
-          </div>
-          <div className="boton" id="agregar">
-            <i className="fa-solid fa-plus" style={{ color: '#ffffff' }} />
-            Añadir comentario
-          </div>
-        </div>
-        <Comment />
       </div>
     </div>
   );
