@@ -43,6 +43,14 @@ body{
     flex-direction: column;
 }
 
+.texto-detalle{
+    background-color: #2a3235;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #c9c9c9;
+}
+
 .superior-dashboard{
     display: flex;
 }

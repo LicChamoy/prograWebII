@@ -1,0 +1,18 @@
+/* Estilo para el mensaje de error */
+.mensaje-error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Estilo para el mensaje de éxito */
+  .mensaje-exito {
+    color: green;
+    font-weight: bold;
+  }
+  
+  /* Resaltar el input en caso de error */
+  .input-error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+  }
+  

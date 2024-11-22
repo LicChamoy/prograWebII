@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/etiqueta.css';
+
 
 // Componente para crear una nueva etiqueta
 const CrearEtiqueta = ({ onEtiquetaCreada }) => {
   const [nombreEtiqueta, setNombreEtiqueta] = useState('');
   const [mensaje, setMensaje] = useState('');
+  const [error, setError] = useState(false);
 
   const manejarCambio = (e) => {
     setNombreEtiqueta(e.target.value);
@@ -28,7 +31,8 @@ const CrearEtiqueta = ({ onEtiquetaCreada }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        setMensaje(`Error: ${errorData.error}`);
+        setMensaje(errorData.error); // Mostrar mensaje de error desde el backend
+        setError(true);
         return;
       }
 
@@ -61,7 +65,7 @@ const CrearEtiqueta = ({ onEtiquetaCreada }) => {
           Crear etiqueta
         </button>
       </div>
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p className={error ? 'mensaje-error' : 'mensaje-exito'}>{mensaje}</p>}
     </div>
   );
 };
@@ -109,11 +113,11 @@ const Etiqueta = () => {
 
   return (
     <div className="etiqueta-contenedor-crear">
-      {/* Crear etiquetas */}
-      <CrearEtiqueta onEtiquetaCreada={agregarEtiqueta} />
-
       {/* Mostrar etiquetas */}
       <MostrarEtiquetas etiquetas={etiquetas} />
+
+      {/* Crear etiquetas */}
+      <CrearEtiqueta onEtiquetaCreada={agregarEtiqueta} />
     </div>
   );
 };

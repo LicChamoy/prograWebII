@@ -9,8 +9,12 @@ router.post('/', async (req, res) => {
     const nuevaEtiqueta = new Etiqueta({ nombreEtiqueta });
     await nuevaEtiqueta.save();
     res.status(201).json({ mensaje: 'Etiqueta creada con éxito', etiqueta: nuevaEtiqueta });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    // Detectar error de duplicado
+    if (error.code === 11000) {
+      return res.status(400).json({ error: 'Esa etiqueta ya existe.' });
+    }
+    res.status(500).json({ error: 'Ocurrió un error al crear la etiqueta.' });
   }
 });
 

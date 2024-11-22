@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/post.css';
+import '../styles/menu.css';
 
 const Post = ({ publicacion }) => {
   if (!publicacion) {
