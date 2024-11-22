@@ -50,8 +50,7 @@ const PostPage = () => {
                 },
                 body: JSON.stringify({
                     contenido: nuevoComentario,
-                    // Asegúrate de incluir el idUsuario
-                    idUsuario: idUsuario,  // Esto debe ser dinámico si el usuario está autenticado
+                    idUsuario: idUsuario,
                 }),
             });
             if (!response.ok) {
