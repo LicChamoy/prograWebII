@@ -21,6 +21,10 @@ const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middleware/authMiddleware');
 const adminMiddleware = require('./middleware/adminMiddleware');
 
+//Cors
+const cors = require('cors');
+app.use(cors({ origin: 'http://localhost:3000' })); //3000 es el default pero por si las moscas
+
 // Rutas
 app.use('/usuarios', usuariosRoutes);
 app.use('/publicaciones', publicacionesRoutes);
