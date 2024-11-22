@@ -32,7 +32,6 @@ const Dashboard = () => {
       <div>
         {/* Barra lateral */}
         <Sidebar />
-
         {/* Publicaciones */}
         <div>
           {posts.map((post) => (
