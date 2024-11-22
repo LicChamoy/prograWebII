@@ -24,14 +24,28 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Obtener etiquetas más populares
 router.get('/populares', async (req, res) => {
   try {
-    const etiquetasPopulares = await Etiqueta.find()
-      .sort({ usos: -1 }) // Ordenar por 'usos' en orden descendente
-      .limit(3); // Limitar a las 3 etiquetas más populares
+    // Agrega un pipeline de agregación para contar usos en publicaciones
+    const etiquetasPopulares = await Publicacion.aggregate([
+      { $unwind: '$etiquetas' }, // Descompone el array de etiquetas en múltiples documentos
+      { $group: { _id: '$etiquetas', usos: { $sum: 1 } } }, // Cuenta las veces que aparece cada etiqueta
+      { $sort: { usos: -1 } }, // Ordena por usos descendentes
+      { $limit: 3 } // Limita a las 3 etiquetas más populares
+    ]);
 
-    res.json(etiquetasPopulares);
+    // Opcional: Traer el nombre de las etiquetas
+    const etiquetasConNombre = await Etiqueta.find({
+      _id: { $in: etiquetasPopulares.map((e) => e._id) }
+    });
+
+    const resultado = etiquetasPopulares.map((etiqueta) => ({
+      _id: etiqueta._id,
+      usos: etiqueta.usos,
+      nombreEtiqueta: etiquetasConNombre.find((e) => e._id.toString() === etiqueta._id.toString())?.nombreEtiqueta
+    }));
+
+    res.json(resultado);
   } catch (err) {
     res.status(500).json({ error: 'Ocurrió un error al obtener etiquetas populares' });
   }
