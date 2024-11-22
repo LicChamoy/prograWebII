@@ -18,8 +18,7 @@ const comentariosRoutes = require('./routes/comentarios');
 const authRoutes = require('./routes/auth');
 
 // Middlewares
-const authMiddleware = require('./middleware/authMiddleware');
-const adminMiddleware = require('./middleware/adminMiddleware');
+const { authMiddleware, adminMiddleware } = require('./middleware/authMiddleware');
 
 //Cors
 const cors = require('cors');
@@ -33,13 +32,13 @@ app.use('/comentarios', comentariosRoutes);
 app.use('/comentarios/reportados', authMiddleware, adminMiddleware, comentariosRoutes);
 app.use('/auth', authRoutes);
 
-const frontendPath = path.join(__dirname, 'frontend', 'build');
-app.use(express.static(frontendPath));
+//const frontendPath = path.join(__dirname, 'frontend', 'build');
+//app.use(express.static(frontendPath));
 
 // Redirigir rutas no definidas al frontend
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
-});
+//app.get('*', (req, res) => {
+//  res.sendFile(path.join(frontendPath, 'index.html'));
+//});
 
 // Configuración del puerto
 const PORT = process.env.PORT || 5000;

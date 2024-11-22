@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Comentario = require('../models/Comentario');
 const Usuario = require('../models/Usuario');
-const authMiddleware = require('../middleware/authMiddleware');
-const adminMiddleware = require('../middleware/adminMiddleware');
+const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
 
 // Crear un nuevo comentario en una publicación
 router.post('/:idPublicacion/comentarios', authMiddleware, async (req, res) => {

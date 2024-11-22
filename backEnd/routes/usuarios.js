@@ -27,6 +27,19 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Obtener lista de todos los usuarios
+router.get('/', async (req, res) => {
+  try {
+    const usuarios = await Usuario.find(); // Obtiene todos los usuarios de la base de datos
+    if (!usuarios || usuarios.length === 0) {
+      return res.status(404).json({ mensaje: 'No se encontraron usuarios.' });
+    }
+    res.json(usuarios); // Responde con la lista de usuarios
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener los usuarios.' });
+  }
+});
+
 
 // Obtener perfil de usuario
 router.get('/:idUsuario', async (req, res) => {
