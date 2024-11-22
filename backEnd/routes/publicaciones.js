@@ -10,6 +10,13 @@ router.post('/', async (req, res) => {
     const { idUsuario, titulo, contenido, etiquetas } = req.body;
     const nuevaPublicacion = new Publicacion({ idUsuario, titulo, contenido, etiquetas });
     await nuevaPublicacion.save();
+
+    // Incrementar el contador de usos de cada etiqueta
+    await Etiqueta.updateMany(
+      { _id: { $in: etiquetas } },
+      { $inc: { usos: 1 } } // Incrementa el campo 'usos' en 1 para cada etiqueta
+    );
+
     res.status(201).json({ mensaje: 'Publicación creada con éxito', publicacion: nuevaPublicacion });
   } catch (err) {
     res.status(400).json({ error: err.message });

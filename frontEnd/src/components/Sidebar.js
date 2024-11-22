@@ -43,7 +43,7 @@ const Sidebar = () => {
           </div>
         ))
       ) : (
-        <p>Cargando etiquetas populares...</p>
+        <p className="etiqueta">Cargando etiquetas populares...</p>
       )}
     </div>
   );

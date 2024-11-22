@@ -27,18 +27,15 @@ router.get('/', async (req, res) => {
 // Obtener etiquetas más populares
 router.get('/populares', async (req, res) => {
   try {
-    const etiquetasPopulares = await Etiqueta.aggregate([
-      { $match: {} }, // Filtro opcional
-      { $lookup: { from: 'publicaciones', localField: 'nombreEtiqueta', foreignField: 'etiquetas', as: 'usos' } },
-      { $addFields: { totalUsos: { $size: '$usos' } } },
-      { $sort: { totalUsos: -1 } },
-      { $limit: 3 }
-    ]);
+    const etiquetasPopulares = await Etiqueta.find()
+      .sort({ usos: -1 }) // Ordenar por 'usos' en orden descendente
+      .limit(3); // Limitar a las 3 etiquetas más populares
 
     res.json(etiquetasPopulares);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener etiquetas populares.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Ocurrió un error al obtener etiquetas populares' });
   }
 });
+
 
 module.exports = router;
