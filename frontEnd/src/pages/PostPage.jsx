@@ -140,15 +140,6 @@ const PostPage = () => {
                             {publicacion.contenido} {/* Contenido de la publicación */}
                         </div>
                         <div className="opciones">
-                            <div className="boton-pub" id="likes">
-                                <label htmlFor="like">
-                                    <i className="fa-solid fa-up-long" style={{ color: '#ffffff' }} id="like"></i>
-                                    0 {/* Aquí podrías usar el conteo de likes */}
-                                </label>
-                                <label htmlFor="dislike">
-                                    <i className="fa-solid fa-down-long" style={{ color: '#ffffff' }} id="dislike"></i>
-                                </label>
-                            </div>
                             <label htmlFor="comentario">
                                 <div className="boton-pub" id="comentario">
                                     <i className="fa-solid fa-comment" style={{ color: '#ffffff' }} id="comentario"></i>
