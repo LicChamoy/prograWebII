@@ -1,9 +1,9 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import '../styles/dashboard.css';
+import '../styles/menu.css';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -24,17 +24,17 @@ const Dashboard = () => {
   }, []); // Solo se ejecuta una vez al montar el componente
 
   return (
-    <div className="contenedor">
+    <div>
       {/* Menú de navegación */}
       <Navbar />
 
       {/* Contenedor de la parte principal */}
-      <div className="contenedor-principal">
+      <div>
         {/* Barra lateral */}
         <Sidebar />
 
         {/* Publicaciones */}
-        <div className="publicaciones">
+        <div>
           {posts.map((post) => (
             <Post key={post._id} publicacion={post} /> // Le pasamos los datos de cada post
           ))}
@@ -43,31 +43,5 @@ const Dashboard = () => {
     </div>
   );
 };
-=======
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import PostDashboard from '../components/PostDashboard';
-import '../styles/menu.css';
-import '../styles/dashboardEstilo.css';
-
-function Dashboard() {
-    return (
-        <div>
-            {/* Barra de navegación */}
-            <Navbar />
-
-            {/* Contenedor principal */}
-            <div className="contenedor">
-                {/* Barra lateral */}
-                <Sidebar />
-
-                {/* Dashboard de publicaciones */}
-                <PostDashboard />
-            </div>
-        </div>
-    );
-}
->>>>>>> e7f8d968c872e0f5f570e942c7f951ba549c585b
 
 export default Dashboard;
