@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/post" element={<PostPage />} />
+        <Route path="/publicaciones/:id" element={<PostPage />} />
         <Route path="/Dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
