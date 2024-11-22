@@ -5,11 +5,17 @@ const Usuario = require('../models/Usuario');
 
 // Ruta para iniciar sesión
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { nombreUsuario, email, password } = req.body;
+
+  // Determinar si se ha proporcionado un nombre de usuario o un correo electrónico
+  const loginField = email || nombreUsuario;
 
   try {
-    // Verificar si el usuario existe
-    const usuario = await Usuario.findOne({ email });
+    // Buscar al usuario por nombre de usuario o correo electrónico
+    const usuario = await Usuario.findOne({
+      $or: [{ nombreUsuario: loginField }, { email: loginField }],
+    });
+
     if (!usuario) {
       return res.status(404).json({ mensaje: 'El usuario no existe' });
     }
@@ -26,6 +32,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' }
     );
 
+    // Respuesta exitosa con el token
     res.json({ mensaje: 'Inicio de sesión exitoso', token });
   } catch (err) {
     res.status(500).json({ error: 'Error del servidor', detalles: err.message });
