@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar'; // Menú de navegación
 import Sidebar from '../components/Sidebar'; // Barra lateral
-import PublicacionForm from '../components/PublicacionForm'; // Formulario para crear publicaciones
+import PublicacionForm from '../components/PublicacionCrear'; // Formulario para crear publicaciones
 import '../styles/crearPublicacionEstilos.css';
 import '../styles/menu.css';
 
@@ -15,12 +15,8 @@ const PublicacionDashboard = () => {
         {/* Barra lateral */}
         <Sidebar />
 
-        {/* Contenido principal */}
-          {/* Lista de etiquetas */}
-          <EtiquetaList />
-
-          {/* Formulario para crear publicación */}
-          <PublicacionForm />
+        {/* Formulario para crear publicación */}
+        <PublicacionForm />
     </div>
   );
 };
