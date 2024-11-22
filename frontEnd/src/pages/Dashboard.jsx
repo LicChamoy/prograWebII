@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import '../styles/dashboard.css';
 import '../styles/menu.css';
+import '../styles/dashboardEstilo.css';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
+
 
   // Cargar los posts desde la base de datos al montar el componente
   useEffect(() => {
@@ -27,7 +31,14 @@ const Dashboard = () => {
     <div>
       {/* Menú de navegación */}
       <Navbar />
-
+      <div className="crear-publicacion">
+        <button 
+          className="btn-crearPub" 
+          onClick={() => navigate('/PublicacionCrear')}
+        >
+          Crear publicación
+        </button>
+      </div>
       {/* Contenedor de la parte principal */}
       <div>
         {/* Barra lateral */}
