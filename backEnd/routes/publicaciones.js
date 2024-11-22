@@ -34,24 +34,22 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Obtener publicación por ID con comentarios
 router.get('/:idPublicacion', async (req, res) => {
   try {
-    // Buscar la publicación por ID
-    const publicacion = await Publicacion.findById(req.params.idPublicacion)
-      .populate('idUsuario', 'nombreUsuario'); // Opcional: incluir información del usuario
+    const publicacion  = await Publicacion.findById(req.params.idPublicacion)
+      .populate('idUsuario', 'nombreUsuario')
+      .populate({
+        path: 'comentarios',
+        populate: { path: 'idUsuario', select: 'nombreUsuario' }
+      });
 
-    if (!publicacion) {
+    if (!publicacion ) {
       return res.status(404).json({ mensaje: 'Publicación no encontrada' });
     }
 
-    // Buscar los comentarios relacionados con la publicación
-    const comentarios = await Comentario.find({ idPublicacion: req.params.idPublicacion });
-
-    // Devolver ambos en una sola respuesta
-    res.json({ publicacion, comentarios });
+    res.json({ publicacion  }); 
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: 'Error al obtener la publicación en la solicitud al servidor' });
   }
 });
 
@@ -102,7 +100,10 @@ router.post('/:idPublicacion/comentarios', async (req, res) => {
 // Obtener todos los comentarios de una publicación
 router.get('/:idPublicacion/comentarios', async (req, res) => {
   try {
-    const comentarios = await Comentario.find({ idPublicacion: req.params.idPublicacion });
+    const comentarios = await Comentario.find({ idPublicacion: req.params.idPublicacion })
+    .populate('idUsuario', 'nombreUsuario')
+    .exec();
+    
     res.json(comentarios);
   } catch (err) {
     res.status(400).json({ error: err.message });

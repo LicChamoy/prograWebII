@@ -16,15 +16,17 @@ const PostPage = () => {
             try {
                 const response = await fetch(`http://localhost:5000/publicaciones/${id}`);
                 const data = await response.json();
+                console.log(data);  // Agrega este log para revisar la respuesta del servidor
                 setPublicacion(data.publicacion);
-                setComentarios(data.comentarios);
+                setComentarios(data.comentarios || []);  // Garantiza que los comentarios sean un arreglo
             } catch (err) {
-                console.error('Error al obtener la publicación:', err);
+                console.error('Error al obtener la publicación en la pagina:', err);
             }
         };
-
+    
         fetchPublicacion();
     }, [id]);
+    
 
     const manejarComentarioChange = (e) => setNuevoComentario(e.target.value);
 
@@ -141,7 +143,9 @@ const PostPage = () => {
                                     <div className="texto-detalle">
                                         <div className="superior">
                                             <img src="../img/admin.png" alt="imagenUsuario" />
-                                            <h5 id="usuarioCom">{comentario.idUsuario.nombreUsuario} ∼</h5>
+                                            <h5 id="usuarioCom">
+                                                {comentario.idUsuario?.nombreUsuario || 'Usuario no disponible'} ∼
+                                            </h5>
                                             <h5 id="hora">{new Date(comentario.fechaComentario).toLocaleString()}</h5> {/* Fecha del comentario */}
                                         </div>
                                         <h5 id="comentarioUsu">{comentario.contenido}</h5> {/* Contenido del comentario */}
