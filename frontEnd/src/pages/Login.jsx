@@ -35,8 +35,7 @@ const Login = () => {
         localStorage.setItem('token', data.token);
 
         // Redirigir al usuario al dashboard
-        console.log('yawe');
-        //window.location.href = '/dashboard';
+        window.location.href = '/Dashboard';
       } else {
         // Si hubo un error en la autenticación, muestra el mensaje
         setMensajeError(data.mensaje || 'Error al iniciar sesión');

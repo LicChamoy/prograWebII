@@ -19,10 +19,18 @@ router.post('/', async (req, res) => {
 // Obtener todas las publicaciones
 router.get('/', async (req, res) => {
   try {
-    const publicaciones = await Publicacion.find().populate('idUsuario', 'nombreUsuario');
-    res.json(publicaciones);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+    const publicaciones = await Publicacion.find(); // Encuentra todas las publicaciones en la base de datos
+    res.json(publicaciones); // Devolvemos el array de publicaciones
+  } catch (error) {
+    // Imprime el error completo en la consola para mayor visibilidad
+    console.error('Error al obtener las publicaciones:', error);
+
+    // Devuelve detalles adicionales en la respuesta
+    res.status(500).json({
+      message: 'Error al obtener las publicaciones',
+      error: error.message, // Mensaje del error
+      stack: error.stack, // Pila de la excepción
+    });
   }
 });
 
