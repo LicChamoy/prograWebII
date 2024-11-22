@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/menu.css';
 
 const Navbar = () => {
@@ -51,7 +51,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="imagen">
-        <img src="../img/logo.png" alt="Logo" />
+        <Link to="/dashboard">
+          <img src="../img/logo.png" alt="Logo" />
+        </Link>
       </div>
       <div className="busqueda">
         <div className="cuadro">
