@@ -47,17 +47,17 @@ body{
     display: flex;
 }
 
-#discusion{
+.discusion{
     margin-left: 5px;
     color: white;
 }
 
-#hora{
+.hora{
     color: #c9c9c9;
     margin-left: 5px;
 }
 
-#usuario{
+.usuario{
     color: darkcyan;
     margin-top: -30px;
     margin-left: 80px;
