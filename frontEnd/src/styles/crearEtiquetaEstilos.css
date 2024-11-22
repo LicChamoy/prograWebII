@@ -61,3 +61,20 @@ body{
     background-color: #616161;
 }
 /* etiqueta crear */
+
+.etiquetas-existentes {
+    color: aquamarine;
+    margin-top: 20px;
+  }
+  
+  .etiquetas-existentes ul {
+
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .etiquetas-existentes li {
+    color: aqua;
+    margin: 5px 0;
+  }
+  
