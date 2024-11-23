@@ -1,12 +1,8 @@
-body{
-    background-color: black;
-    margin: 0;
-}
-
-.publicacion-contenedor-crear{
-    width: 100%;
-    justify-items: center;
-}
+.publicacion-contenedor-crear {
+    display: flex;
+    justify-content: center; /* Centrar el formulario horizontalmente */
+    padding: 20px;
+  }
 
 /* Publicacion crear */
 .publicacion-crear{
@@ -19,36 +15,21 @@ body{
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    top: 200px;
+    width: 100%;
+    max-width: 500px;
+    gap: 15px;
+
 }
 
-.pub-opciones{
+.pub-campo {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Asegura que label y select/textarea estén en una columna */
+    gap: 5px; /* Espaciado entre el label y el input */
 }
 
 .pub-opciones label{
     color: white;
     left: 5px;
-    position: relative;
-}
-
-.pub-opciones select{
-    position: relative;
-    left: 15px;
-    height: 30px;
-    width: 100px;
-    text-align: center;
-}
-
-.pub-opciones #nombre-etiqueta{
-    left: 20px;
-    position: relative;
-}
-
-.pub-opciones #input-pub-etiqueta{
-    left: 30px;
     position: relative;
 }
 
@@ -71,6 +52,10 @@ body{
     position: relative;
 }
 
+.mensaje{
+    color: white;
+}
+
 .publicacion-crear #btn-crearEtiqueta{
     left: 1060px;
 }
@@ -78,4 +63,19 @@ body{
 #btn-crearPublicacion:hover{
     background-color: #616161;
 }
+
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
 /* Publicacion crear */
