@@ -10,6 +10,7 @@ const PostPage = () => {
     const [publicacion, setPublicacion] = useState(null);
     const [comentarios, setComentarios] = useState([]);
     const [nuevoComentario, setNuevoComentario] = useState('');
+    const [etiquetas, setEtiquetas] = useState([]);
 
     useEffect(() => {
         const fetchPublicacionYComentarios = async () => {
@@ -18,18 +19,26 @@ const PostPage = () => {
                 const dataPublicacion = await responsePublicacion.json();
                 setPublicacion(dataPublicacion.publicacion);
     
+                // Obtener comentarios asociados
                 const responseComentarios = await fetch(`http://localhost:5000/publicaciones/${id}/comentarios`);
                 const dataComentarios = await responseComentarios.json();
-                console.log('Comentarios obtenidos:', dataComentarios); // Revisa los datos obtenidos
-                setComentarios(dataComentarios || []); // Asegúrate de que sea un arreglo
+                setComentarios(dataComentarios || []);
+
+                // Obtener las etiquetas utilizando los IDs de las etiquetas
+                const etiquetasIds = dataPublicacion.publicacion.etiquetas;
+                const responseEtiquetas = await fetch('http://localhost:5000/etiquetas');
+                const dataEtiquetas = await responseEtiquetas.json();
+                const etiquetasFiltradas = dataEtiquetas.filter(etiqueta =>
+                    etiquetasIds.includes(etiqueta._id)
+                );
+                setEtiquetas(etiquetasFiltradas);
             } catch (err) {
                 console.error('Error al obtener la publicación o los comentarios:', err);
             }
         };
-    
+
         fetchPublicacionYComentarios();
     }, [id]);
-        
 
     const manejarComentarioChange = (e) => setNuevoComentario(e.target.value);
 
@@ -38,10 +47,10 @@ const PostPage = () => {
         if (nuevoComentario.trim() === '') return;
     
         try {
-            const token = localStorage.getItem('token'); // Obtener el token del usuario
+            const token = localStorage.getItem('token');
     
             if (!token) {
-              throw new Error('No se encontró el token. El usuario no está autenticado.');
+                throw new Error('No se encontró el token. El usuario no está autenticado.');
             }
 
             const decodedToken = jwtDecode(token);
@@ -72,7 +81,7 @@ const PostPage = () => {
     
     const manejarReporteComentario = async (idComentario) => {
         try {
-            const token = localStorage.getItem('token'); // Obtener el token del usuario
+            const token = localStorage.getItem('token');
             const response = await fetch(`http://localhost:5000/comentarios/${idComentario}/reportar`, {
                 method: 'PATCH',
                 headers: {
@@ -95,7 +104,9 @@ const PostPage = () => {
         } catch (err) {
             console.error('Error al reportar el comentario:', err);
         }
-    };    if (!publicacion) {
+    };
+
+    if (!publicacion) {
         return <div>Cargando publicación...</div>;
     }
 
@@ -119,7 +130,21 @@ const PostPage = () => {
                         </div>
                         <div className="publicacion-contenido">
                             {publicacion.contenido} {/* Contenido de la publicación */}
+                                                    {/* Sección de etiquetas */}
+                            <div className="etiquetas-contenedor">
+                                {etiquetas.length > 0 && (
+                                    <div>
+                                        <h5>Etiquetas:</h5>
+                                        <ul>
+                                            {etiquetas.map((etiqueta) => (
+                                                <li key={etiqueta._id}>{etiqueta.nombreEtiqueta}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
+
                         <div className="opciones">
                             <label htmlFor="comentario">
                                 <div className="boton-pub" id="comentario">
