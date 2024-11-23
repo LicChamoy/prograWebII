@@ -26,6 +26,10 @@ const Sidebar = () => {
         <i className="fa-solid fa-house" />
         Home
       </div>
+      <div className="etiqueta" id="wallofshame" onClick={() => navigate('/MuroDeLaVerguenza')}>
+        <i className="fa-solid fa-tag fa-flip-horizontal" />
+        Muro de la verguenza
+      </div>
       <div className="etiqueta" id="etiquetas" onClick={() => navigate('/Etiqueta')}>
         <i className="fa-solid fa-tag fa-flip-horizontal" />
         Etiquetas

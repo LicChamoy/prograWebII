@@ -8,7 +8,7 @@ import Etiqueta from './pages/CrearEtiq';
 import PublicacionCrear from './pages/CrearPub';
 import ReporteComentario from './pages/ReporteComentario';
 import ResultadosBusqueda from './pages/ResultadosBusqueda';
-import ComentariosReportados from './pages/ComentariosReportados';
+import MuroDeLaVerguenza from './pages/MuroDeLaVerguenza';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path="/PublicacionCrear" element={<PublicacionCrear />} />
         <Route path="/ReporteComentario" element={<ReporteComentario />} />
         <Route path="/resultados-busqueda" element={<ResultadosBusqueda />} />
-        <Route path="/comentarios-reportados" component={ComentariosReportados} />
+        <Route path="/MuroDeLaVerguenza" element={<MuroDeLaVerguenza />} />
       </Routes>
     </Router>
   );

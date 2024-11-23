@@ -24,7 +24,7 @@ router.patch('/:idComentario/reportar', async (req, res) => {
 });
 
 // Obtener todos los comentarios reportados
-router.get('/comentarios/reportados', async (req, res) => {
+router.get('/reportados', async (req, res) => {
   try {
     const comentariosReportados = await Comentario.find({ reportado: true });
     res.json(comentariosReportados);
