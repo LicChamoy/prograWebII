@@ -5,6 +5,8 @@ import '../styles/menu.css';
 
 const Navbar = () => {
   const [usuario, setUsuario] = useState(null); // Estado para los datos del usuario
+  const [keyword, setKeyword] = useState(''); // Estado para almacenar el texto de búsqueda
+  const [resultadosBusqueda, setResultadosBusqueda] = useState([]); // Estado para los resultados de búsqueda
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,6 +50,25 @@ const Navbar = () => {
     navigate('/login'); // Redirigir al login
   };
 
+  // Función para manejar la búsqueda
+  const manejarBusqueda = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/buscar?keyword=${keyword}`);
+  
+      if (!response.ok) {
+        console.error('Error en la respuesta del servidor:', response.statusText);
+        return;
+      }
+  
+      const data = await response.json();
+      setResultadosBusqueda(data);
+      navigate('/resultados-busqueda');
+    } catch (err) {
+      console.error('Error al realizar la búsqueda:', err);
+    }
+  };
+    
+
   return (
     <nav className="navbar">
       <div className="imagen">
@@ -58,8 +79,18 @@ const Navbar = () => {
       <div className="busqueda">
         <div className="cuadro">
           <label htmlFor="buscar">
-            <input type="text" placeholder="Buscar..." id="buscar" />
-            <i className="fa-solid fa-magnifying-glass" style={{ color: '#ffffff' }} />
+            <input
+              type="text"
+              placeholder="Buscar..."
+              id="buscar"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)} // Actualizar el estado del texto de búsqueda
+            />
+            <i
+              className="fa-solid fa-magnifying-glass"
+              style={{ color: '#ffffff' }}
+              onClick={manejarBusqueda} // Ejecutar la búsqueda al hacer clic
+            />
           </label>
         </div>
       </div>

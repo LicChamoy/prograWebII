@@ -175,6 +175,12 @@ const PostPage = () => {
                                                 {comentario.idUsuario?.nombreUsuario || 'Usuario no disponible'} ∼
                                             </h5>
                                             <h5 id="hora">{new Date(comentario.fechaComentario).toLocaleString()}</h5> {/* Fecha del comentario */}
+                                            <button
+                                                onClick={() => manejarReporteComentario(comentario._id)}
+                                                disabled={comentario.reportado}
+                                            >
+                                                {comentario.reportado ? 'Reportado' : 'Reportar'}
+                                            </button>
                                         </div>
                                         <h5 id="comentarioUsu">{comentario.contenido}</h5> {/* Contenido del comentario */}
                                     </div>

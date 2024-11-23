@@ -5,7 +5,7 @@ const Usuario = require('../models/Usuario');
 const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
 
 // Reportar un comentario como inapropiado
-router.patch('/:idComentario/reportar', authMiddleware, async (req, res) => {
+router.patch('/:idComentario/reportar', async (req, res) => {
   try {
     const comentario = await Comentario.findByIdAndUpdate(
       req.params.idComentario,
@@ -23,8 +23,8 @@ router.patch('/:idComentario/reportar', authMiddleware, async (req, res) => {
   }
 });
 
-// Obtener todos los comentarios reportados (solo administradores)
-router.get('/comentarios/reportados', authMiddleware, adminMiddleware, async (req, res) => {
+// Obtener todos los comentarios reportados
+router.get('/comentarios/reportados', async (req, res) => {
   try {
     const comentariosReportados = await Comentario.find({ reportado: true });
     res.json(comentariosReportados);
@@ -32,6 +32,7 @@ router.get('/comentarios/reportados', authMiddleware, adminMiddleware, async (re
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // Eliminar un comentario (solo administradores)
 router.delete('/:idComentario', authMiddleware, adminMiddleware, async (req, res) => {

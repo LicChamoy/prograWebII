@@ -85,48 +85,6 @@ router.get('/por-nombre', async (req, res) => {
   }
 });
 
-// Buscar publicaciones por palabra clave
-router.get('/buscar', async (req, res) => {
-  try {
-    const { keyword } = req.query;
-
-    if (!keyword) {
-      return res.status(400).json({ mensaje: 'Debe proporcionar una palabra clave para la búsqueda.' });
-    }
-
-    // Búsqueda en título y contenido de publicaciones
-    const publicaciones = await Publicacion.find({
-      $or: [
-        { titulo: { $regex: keyword, $options: 'i' } }, // 'i' para que sea insensible a mayúsculas/minúsculas
-        { contenido: { $regex: keyword, $options: 'i' } }
-      ]
-    })
-      .populate('idUsuario', 'nombreUsuario') // Opcional: incluir información del usuario
-      .populate('comentarios'); // Opcional: incluir comentarios si es necesario
-
-    // Búsqueda en comentarios (si los comentarios contienen la palabra clave)
-    const comentarios = await Comentario.find({
-      contenido: { $regex: keyword, $options: 'i' }
-    }).populate('idPublicacion');
-
-    // Agregar publicaciones relacionadas con los comentarios encontrados
-    const publicacionesDesdeComentarios = await Publicacion.find({
-      _id: { $in: comentarios.map((comentario) => comentario.idPublicacion) }
-    }).populate('idUsuario', 'nombreUsuario');
-
-    // Combinar y eliminar duplicados
-    const todasLasPublicaciones = [...publicaciones, ...publicacionesDesdeComentarios];
-    const publicacionesUnicas = todasLasPublicaciones.filter(
-      (value, index, self) => self.findIndex((p) => p._id.toString() === value._id.toString()) === index
-    );
-
-    res.json(publicacionesUnicas);
-  } catch (err) {
-    console.error('Error al buscar publicaciones:', err);
-    res.status(500).json({ error: 'Ocurrió un error al realizar la búsqueda.' });
-  }
-});
-
 
 // Crear un nuevo comentario en una publicación
 const mongoose = require('mongoose');

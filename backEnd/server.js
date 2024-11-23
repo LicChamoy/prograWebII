@@ -16,6 +16,7 @@ const publicacionesRoutes = require('./routes/publicaciones');
 const etiquetasRoutes = require('./routes/etiquetas');
 const comentariosRoutes = require('./routes/comentarios');
 const authRoutes = require('./routes/auth');
+const buscarRouter = require('./routes/buscar'); 
 
 // Middlewares
 const { authMiddleware, adminMiddleware } = require('./middleware/authMiddleware');
@@ -29,8 +30,8 @@ app.use('/usuarios', usuariosRoutes);
 app.use('/publicaciones', publicacionesRoutes);
 app.use('/etiquetas', etiquetasRoutes);
 app.use('/comentarios', comentariosRoutes);
-app.use('/comentarios/reportados', authMiddleware, adminMiddleware, comentariosRoutes);
 app.use('/auth', authRoutes);
+app.use('/buscar', buscarRouter);
 
 //const frontendPath = path.join(__dirname, 'frontend', 'build');
 //app.use(express.static(frontendPath));
