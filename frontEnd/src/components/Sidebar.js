@@ -39,7 +39,7 @@ const Sidebar = () => {
             onClick={() => navigate(`/Etiqueta/${etiqueta.nombreEtiqueta}`)}
           >
             <i className="fa-solid fa-tag fa-flip-horizontal" />
-            {etiqueta.nombreEtiqueta}
+            {etiqueta.nombreEtiqueta}  {/* Mostrar nombre de la etiqueta */}
           </div>
         ))
       ) : (
